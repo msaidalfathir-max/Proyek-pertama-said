@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101426">
+  <title>M. Said Al Fathir | Profil & Kisah Saya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ==================== 1. WARNA & PENGATURAN DASAR ==================== */
+    :root {
+      --bg: #0b1020;
+      --surface: rgba(22, 30, 53, .78);
+      --surface-solid: #151e35;
+      --text: #f3f6ff;
+      --muted: #aab5cf;
+      --line: rgba(255,255,255,.11);
+      --primary: #8b5cf6;
+      --secondary: #22d3ee;
+      --accent: #a78bfa;
+      --shadow: 0 18px 55px rgba(0,0,0,.22);
+      --nav: rgba(11,16,32,.82);
+      --radius: 22px;
+    }
+    body.light {
+      --bg: #f4f7ff;
+      --surface: rgba(255,255,255,.78);
+      --surface-solid: #ffffff;
+      --text: #17213b;
+      --muted: #596781;
+      --line: rgba(23,33,59,.12);
+      --primary: #7045df;
+      --secondary: #0891b2;
+      --accent: #7045df;
+      --shadow: 0 18px 55px rgba(39,54,95,.10);
+      --nav: rgba(244,247,255,.86);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 95px; }
+    body {
+      font-family: "Poppins", sans-serif;
+      background:
+        radial-gradient(circle at 10% 8%, rgba(139,92,246,.17), transparent 28rem),
+        radial-gradient(circle at 90% 38%, rgba(34,211,238,.12), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      transition: background .3s, color .3s;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    button { cursor: pointer; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(1100px, calc(100% - 40px)); margin-inline: auto; }
+    .gradient-text {
+      background: linear-gradient(100deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .section { padding: 88px 0; }
+    .section-heading { margin-bottom: 30px; }
+    .eyebrow {
+      color: var(--secondary); font-size: .78rem; font-weight: 700;
+      letter-spacing: .16em; text-transform: uppercase;
+    }
+    h1, h2, h3 { line-height: 1.2; }
+    h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-top: 8px; }
+    .section-desc { color: var(--muted); max-width: 650px; margin-top: 12px; }
+    .glass {
+      background: var(--surface); border: 1px solid var(--line);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      padding: 12px 19px; border-radius: 999px; border: 1px solid var(--line);
+      font-weight: 600; transition: transform .3s, box-shadow .3s, background .3s;
+    }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary {
+      color: white; border: 0;
+      background: linear-gradient(110deg, var(--primary), #536dfe 55%, var(--secondary));
+      box-shadow: 0 10px 25px rgba(111,86,230,.25);
+    }
+    .btn-soft { background: var(--surface); color: var(--text); }
+    :focus-visible { outline: 3px solid var(--secondary); outline-offset: 4px; }
+    .muted { color: var(--muted); }
+
+    /* ==================== 2. NAVIGASI ==================== */
+    .site-header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--nav); border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    }
+    .nav-wrap { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .brand { font-weight: 800; font-size: 1.05rem; letter-spacing: -.04em; }
+    .brand span { color: var(--secondary); }
+    .nav-right, .nav-links { display: flex; align-items: center; gap: 8px; }
+    .nav-links a, .theme-btn, .menu-btn {
+      border: 0; color: var(--muted); background: transparent; padding: 9px 12px;
+      border-radius: 12px; font-size: .88rem; transition: .3s;
+    }
+    .nav-links a:hover, .nav-links a.active, .theme-btn:hover { color: var(--text); background: var(--surface); }
+    .theme-btn { border: 1px solid var(--line); color: var(--text); }
+    .menu-btn { display: none; color: var(--text); border: 1px solid var(--line); font-size: 1.2rem; }
+    .page { display: none; min-height: 70vh; }
+    .page.active { display: block; animation: pageIn .45s ease both; }
+    @keyframes pageIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+    /* ==================== 3. HALAMAN PROFIL / HERO ==================== */
+    .hero { padding: 75px 0 65px; }
+    .hero-grid { display: grid; grid-template-columns: 1.25fr .75fr; align-items: center; gap: 45px; }
+    .hero h1 { font-size: clamp(2.35rem, 6vw, 4.5rem); letter-spacing: -.055em; margin: 12px 0; }
+    .hero-tagline { min-height: 34px; font-size: clamp(1rem, 2.5vw, 1.3rem); font-weight: 600; }
+    .hero-copy { color: var(--muted); max-width: 620px; margin: 18px 0 25px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .profile-panel { padding: 28px; text-align: center; }
+    .avatar-ring {
+      width: 190px; aspect-ratio: 1; margin: 0 auto 18px; padding: 5px;
+      border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary), #f0abfc);
+      box-shadow: 0 15px 45px rgba(115,89,230,.25);
+    }
+    .avatar-inner {
+      width: 100%; height: 100%; border-radius: 50%; overflow: hidden;
+      background: linear-gradient(135deg, #7653df, #159bbd);
+      display: grid; place-items: center; color: white; font-size: 2.5rem; font-weight: 800;
+    }
+    .avatar-inner img { width: 100%; height: 100%; object-fit: cover; }
+    .photo-hint { color: var(--muted); font-size: .78rem; margin-top: 7px; }
+    .profile-name { font-size: 1.15rem; font-weight: 700; }
+    .photo-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 15px; }
+    .small-btn { border: 1px solid var(--line); color: var(--text); background: var(--surface); padding: 8px 12px; border-radius: 11px; font-size: .78rem; }
+    .small-btn:hover { border-color: var(--secondary); }
+    .notice { font-size: .8rem; min-height: 22px; margin-top: 8px; color: var(--secondary); }
+    .notice.error { color: #fb7185; }
+
+    /* ==================== 4. KARTU, SKILL, TIMELINE, PROYEK ==================== */
+    .info-grid, .skill-grid, .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .info-card, .skill-card, .project-card, .timeline-card, .story-card, .contact-card { padding: 23px; }
+    .info-card .symbol { font-size: 1.5rem; margin-bottom: 9px; }
+    .info-card h3, .project-card h3 { font-size: 1rem; margin-bottom: 7px; }
+    .info-card p, .project-card p { color: var(--muted); font-size: .88rem; }
+    .skill-card { min-height: 130px; }
+    .skill-top { display: flex; justify-content: space-between; gap: 12px; font-weight: 600; font-size: .9rem; }
+    .skill-track { height: 9px; margin-top: 18px; background: var(--line); border-radius: 99px; overflow: hidden; }
+    .skill-fill { width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--primary), var(--secondary)); transition: width 1.2s ease; }
+    .timeline { position: relative; max-width: 780px; margin-left: 8px; padding-left: 28px; border-left: 2px solid var(--line); display: grid; gap: 20px; }
+    .timeline-item { position: relative; }
+    .timeline-item::before {
+      content: ""; position: absolute; width: 13px; height: 13px; border-radius: 50%;
+      left: -36px; top: 24px; background: var(--secondary); box-shadow: 0 0 0 5px var(--bg);
+    }
+    .timeline-card h3 { font-size: 1rem; margin: 6px 0; }
+    .timeline-date { color: var(--secondary); font-size: .78rem; font-weight: 700; }
+    .timeline-card p { color: var(--muted); font-size: .88rem; }
+    .project-card { display: flex; flex-direction: column; min-height: 225px; transition: transform .3s, box-shadow .3s; }
+    .project-card:hover { transform: translateY(-8px); box-shadow: 0 22px 50px rgba(0,0,0,.2); }
+    .project-icon { font-size: 1.7rem; margin-bottom: 14px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin: 15px 0; }
+    .tag { font-size: .7rem; padding: 5px 9px; border-radius: 99px; color: var(--secondary); background: rgba(34,211,238,.1); }
+    .project-link { margin-top: auto; color: var(--secondary); font-size: .85rem; font-weight: 600; }
+
+    /* ==================== 5. KONTAK & FOOTER ==================== */
+    .contact-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 18px; }
+    .socials { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
+    .socials a { border: 1px solid var(--line); border-radius: 12px; padding: 9px 12px; color: var(--muted); font-size: .82rem; transition: .3s; }
+    .socials a:hover { color: var(--text); border-color: var(--secondary); transform: translateY(-2px); }
+    .form-group { margin-bottom: 14px; }
+    label { display: block; font-size: .83rem; font-weight: 600; margin-bottom: 6px; }
+    input, textarea {
+      width: 100%; border: 1px solid var(--line); background: var(--bg); color: var(--text);
+      border-radius: 12px; padding: 12px 14px; outline: none; transition: border .3s;
+    }
+    input:focus, textarea:focus { border-color: var(--secondary); }
+    textarea { min-height: 120px; resize: vertical; }
+    .form-status { color: var(--secondary); font-size: .83rem; margin-top: 10px; min-height: 23px; }
+    footer { border-top: 1px solid var(--line); padding: 24px 0; color: var(--muted); font-size: .82rem; }
+    .footer-row { display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+    .back-top { color: var(--secondary); font-weight: 600; }
+
+    /* ==================== 6. HALAMAN KISAH SAYA ==================== */
+    .story-hero { padding: 76px 0 40px; text-align: center; }
+    .story-hero h1 { font-size: clamp(2.1rem, 5vw, 3.8rem); margin: 12px auto; max-width: 850px; }
+    .story-hero p { color: var(--muted); max-width: 700px; margin: 15px auto 0; }
+    .story-layout { display: grid; grid-template-columns: 1fr .75fr; gap: 20px; align-items: start; }
+    .story-card p { color: var(--muted); margin-top: 13px; }
+    .story-card h2 { font-size: 1.35rem; margin-bottom: 12px; }
+    .quote {
+      padding: 25px; border-left: 4px solid var(--secondary);
+      background: linear-gradient(120deg, rgba(139,92,246,.13), rgba(34,211,238,.08));
+      border-radius: 0 18px 18px 0; margin-top: 18px; font-weight: 600;
+    }
+    .story-steps { display: grid; gap: 13px; }
+    .story-step { padding: 17px; }
+    .story-step strong { display: block; color: var(--secondary); margin-bottom: 4px; }
+    .story-step p { color: var(--muted); font-size: .85rem; }
+    .story-note { margin-top: 20px; padding: 20px; }
+    .story-note p { color: var(--muted); margin-top: 7px; }
+
+    /* ==================== 7. ANIMASI & RESPONSIF ==================== */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (max-width: 800px) {
+      .hero-grid, .story-layout, .contact-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 48px; }
+      .profile-panel { max-width: 420px; margin: 0 auto; width: 100%; }
+      .info-grid, .skill-grid, .project-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 650px) {
+      .container { width: min(100% - 28px, 1100px); }
+      .nav-wrap { min-height: 65px; }
+      .menu-btn { display: inline-block; }
+      .nav-right { gap: 6px; }
+      .nav-links {
+        display: none; position: absolute; top: 65px; left: 14px; right: 14px;
+        padding: 12px; flex-direction: column; align-items: stretch;
+        background: var(--surface-solid); border: 1px solid var(--line); border-radius: 17px;
+        box-shadow: var(--shadow);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px; }
+      .section { padding: 65px 0; }
+      .info-grid, .skill-grid, .project-grid { grid-template-columns: 1fr; }
+      .footer-row { flex-direction: column; text-align: center; }
+      .avatar-ring { width: 165px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ==================== NAVIGASI UTAMA ==================== -->
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#beranda" aria-label="Ke halaman profil">SAID<span>.</span></a>
+      <nav class="nav-links" id="navLinks" aria-label="Navigasi utama">
+        <a href="#beranda" data-page-link="profil" class="active">Profil</a>
+        <a href="#tentang" data-page-link="profil">Tentang</a>
+        <a href="#keahlian" data-page-link="profil">Keahlian</a>
+        <a href="#proyek" data-page-link="profil">Proyek</a>
+        <a href="#kontak" data-page-link="profil">Kontak</a>
+        <a href="#kisah" data-page-link="kisah">Kisah Saya</a>
+      </nav>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeToggle" type="button" aria-label="Ganti tema">☀️</button>
+        <button class="menu-btn" id="menuToggle" type="button" aria-label="Buka menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==================== HALAMAN 1: PROFIL ==================== -->
+    <div class="page active" id="profilPage" data-page="profil">
+      <section class="hero" id="beranda">
+        <div class="container hero-grid">
+          <div class="reveal">
+            <span class="eyebrow">PORTOFOLIO PERSONAL</span>
+            <h1>Halo, saya <span class="gradient-text">M. Said Al Fathir</span></h1>
+            <div class="hero-tagline">Saya seorang <span class="gradient-text" id="typingText">Pelajar SMK</span><span aria-hidden="true">|</span></div>
+            <p class="hero-copy">Selamat datang di website pribadi saya. Di sini kamu bisa mengenal profil, minat, kemampuan, proyek, dan perjalanan saya sebagai siswa SMK.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#kontak">Hubungi Saya ↗</a>
+              <a class="btn btn-soft" href="#proyek">Lihat Proyek ↓</a>
+            </div>
+          </div>
+          <div class="profile-panel glass reveal">
+            <div class="avatar-ring">
+              <div class="avatar-inner" id="avatarArea" title="Klik untuk memilih foto">
+                <span id="avatarInitial">SAID</span>
+                <img id="profileImage" alt="Foto profil M. Said Al Fathir" hidden>
+              </div>
+            </div>
+            <div class="profile-name">M. Said Al Fathir</div>
+            <p class="muted">Pelajar • Calon Kreator Digital</p>
+            <p class="photo-hint">Klik foto atau tombol di bawah untuk mengganti foto.</p>
+            <input type="file" id="photoInput" accept="image/*" hidden>
+            <div class="photo-actions">
+              <button class="small-btn" type="button" id="changePhoto">Ubah Foto</button>
+              <button class="small-btn" type="button" id="removePhoto">Hapus Foto</button>
+            </div>
+            <p class="notice" id="photoNotice" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="tentang">
+        <div class="container">
+          <div class="section-heading reveal">
+            <span class="eyebrow">KENALI SAYA</span>
+            <h2>Tentang <span class="gradient-text">Saya</span></h2>
+            <p class="section-desc">Saya adalah seorang pelajar yang ingin terus belajar, mencoba hal baru, dan mengembangkan kemampuan di bidang teknologi serta kreativitas.</p>
+          </div>
+          <div class="info-grid">
+            <article class="info-card glass reveal"><div class="symbol">📍</div><h3>Lokasi</h3><p>Bangkinang, Riau</p></article>
+            <article class="info-card glass reveal"><div class="symbol">🎓</div><h3>Pendidikan</h3><p>SMK Negeri 1 Bangkinang</p></article>
+            <article class="info-card glass reveal"><div class="symbol">💡</div><h3>Minat</h3><p>Teknologi, desain, dan membuat game</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="keahlian">
+        <div class="container">
+          <div class="section-heading reveal">
+            <span class="eyebrow">KEMAMPUAN</span>
+            <h2>Keahlian & <span class="gradient-text">Minat</span></h2>
+            <p class="section-desc">Bagian ini bisa kamu ubah sesuai kemampuan yang sedang dipelajari.</p>
+          </div>
+          <div class="skill-grid">
+            <article class="skill-card glass reveal"><div class="skill-top"><span>HTML & CSS</span><span>65%</span></div><div class="skill-track"><div class="skill-fill" data-width="65%"></div></div></article>
+            <article class="skill-card glass reveal"><div class="skill-top"><span>JavaScript</span><span>45%</span></div><div class="skill-track"><div class="skill-fill" data-width="45%"></div></div></article>
+            <article class="skill-card glass reveal"><div class="skill-top"><span>Desain Kreatif</span><span>60%</span></div><div class="skill-track"><div class="skill-fill" data-width="60%"></div></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="pendidikan">
+        <div class="container">
+          <div class="section-heading reveal"><span class="eyebrow">PERJALANAN</span><h2>Pengalaman & <span class="gradient-text">Pendidikan</span></h2></div>
+          <div class="timeline">
+            <article class="timeline-item reveal"><div class="timeline-card glass"><span class="timeline-date">SAAT INI</span><h3>SMK Negeri 1 Bangkinang</h3><p>Menjalani proses belajar, mengenal lingkungan sekolah, dan mengembangkan kemampuan untuk masa depan.</p></div></article>
+            <article class="timeline-item reveal"><div class="timeline-card glass"><span class="timeline-date">SEBELUMNYA</span><h3>Masa Sekolah Sebelumnya</h3><p>EDIT DI SINI — Tambahkan nama sekolah sebelumnya dan pengalaman yang ingin diceritakan.</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="proyek">
+        <div class="container">
+          <div class="section-heading reveal"><span class="eyebrow">HASIL KARYA</span><h2>Proyek <span class="gradient-text">Saya</span></h2><p class="section-desc">Beberapa contoh proyek yang bisa diganti dengan hasil karya milikmu.</p></div>
+          <div class="project-grid">
+            <article class="project-card glass reveal"><div class="project-icon">🌐</div><h3>Website Personal</h3><p>Website sederhana untuk memperkenalkan diri dan menampilkan karya.</p><div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div><a class="project-link" href="#kontak">Lihat detail →</a></article>
+            <article class="project-card glass reveal"><div class="project-icon">🎮</div><h3>Game 2D</h3><p>Proyek latihan membuat permainan sederhana dengan karakter dan level.</p><div class="tags"><span class="tag">Construct</span><span class="tag">Game Design</span></div><a class="project-link" href="#kontak">Lihat detail →</a></article>
+            <article class="project-card glass reveal"><div class="project-icon">🎨</div><h3>Desain Kreatif</h3><p>Eksperimen membuat desain visual untuk melatih kreativitas.</p><div class="tags"><span class="tag">Desain</span><span class="tag">Kreativitas</span></div><a class="project-link" href="#kontak">Lihat detail →</a></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="kontak">
+        <div class="container">
+          <div class="section-heading reveal"><span class="eyebrow">TERHUBUNG</span><h2>Hubungi <span class="gradient-text">Saya</span></h2><p class="section-desc">Kirim pesan melalui formulir atau kunjungi tautan sosial saya.</p></div>
+          <div class="contact-grid">
+            <div class="contact-card glass reveal">
+              <h3>Mari terhubung!</h3>
+              <p class="muted" style="margin-top:8px">EDIT DI SINI — Tambahkan kalimat kontak atau informasi lain yang ingin ditampilkan.</p>
+              <div class="socials">
+                <!-- EDIT DI SINI: ganti # dengan alamat akun sosial milikmu -->
+                <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+                <a href="mailto:emailkamu@example.com">Email ↗</a>
+              </div>
+            </div>
+            <form class="contact-card glass reveal" id="contactForm">
+              <div class="form-group"><label for="name">Nama</label><input id="name" name="name" type="text" placeholder="Masukkan nama" required minlength="2"></div>
+              <div class="form-group"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="nama@email.com" required></div>
+              <div class="form-group"><label for="message">Pesan</label><textarea id="message" name="message" placeholder="Tulis pesan..." required minlength="5"></textarea></div>
+              <button class="btn btn-primary" type="submit">Kirim Pesan ↗</button>
+              <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==================== HALAMAN 2: KISAH MASUK SMK ==================== -->
+    <div class="page" id="kisahPage" data-page="kisah">
+      <section class="story-hero">
+        <div class="container reveal">
+          <span class="eyebrow">CERITA PERJALANAN</span>
+          <h1>Awal Perjalanan Saya di <span class="gradient-text">SMK Negeri 1 Bangkinang</span></h1>
+          <p>Sebuah cerita tentang langkah baru, pengalaman, pembelajaran, dan harapan saya saat memasuki dunia sekolah kejuruan.</p>
+        </div>
+      </section>
+      <section class="section" style="padding-top:25px">
+        <div class="container story-layout">
+          <article class="story-card glass reveal">
+            <span class="eyebrow">KISAH SAYA</span>
+            <h2>Langkah Baru Menuju Masa Depan</h2>
+            <!-- EDIT DI SINI: sesuaikan cerita dengan pengalaman asli kamu -->
+            <p>Perjalanan saya masuk SMK Negeri 1 Bangkinang menjadi salah satu langkah penting dalam kehidupan pendidikan saya. Saat pertama kali memiliki keinginan untuk melanjutkan sekolah ke SMK, saya merasa senang sekaligus memiliki rasa penasaran tentang pengalaman baru yang akan saya temui.</p>
+            <p>Ketika memilih SMK Negeri 1 Bangkinang, saya berharap bisa mendapatkan ilmu dan keterampilan yang berguna untuk masa depan. Saya menyadari bahwa masuk ke lingkungan sekolah yang baru berarti saya harus siap beradaptasi, mengenal teman-teman baru, guru, serta aturan dan kegiatan sekolah.</p>
+            <p>Hari-hari pertama di sekolah menjadi pengalaman yang berkesan. Saya mulai mengenal lingkungan sekolah, ruang kelas, fasilitas, dan suasana belajar. Dari situ saya belajar untuk lebih mandiri, disiplin, bertanggung jawab, serta berani mencoba hal-hal baru.</p>
+            <p>Selama menjadi siswa, saya ingin memanfaatkan kesempatan belajar sebaik mungkin. Saya juga ingin mengembangkan kemampuan, terutama dalam bidang teknologi, komputer, desain, dan hal-hal kreatif yang sesuai dengan minat saya.</p>
+            <p>Saya tahu perjalanan ini tidak selalu mudah. Akan ada tugas, tantangan, dan hal baru yang harus dipelajari. Namun, saya ingin menjadikan semua pengalaman tersebut sebagai bekal untuk berkembang dan meraih cita-cita.</p>
+            <div class="quote">“Setiap perjalanan besar selalu dimulai dari satu langkah kecil. Bagi saya, SMK Negeri 1 Bangkinang adalah salah satu awal untuk membangun masa depan.”</div>
+          </article>
+          <aside class="story-steps">
+            <div class="story-step glass reveal"><strong>01 — Memulai</strong><p>Memiliki keinginan untuk melanjutkan pendidikan dan menentukan pilihan sekolah.</p></div>
+            <div class="story-step glass reveal"><strong>02 — Beradaptasi</strong><p>Mengenal lingkungan SMK Negeri 1 Bangkinang, guru, teman, dan suasana belajar.</p></div>
+            <div class="story-step glass reveal"><strong>03 — Belajar</strong><p>Mengikuti pelajaran, mengerjakan tugas, dan mengembangkan keterampilan.</p></div>
+            <div class="story-step glass reveal"><strong>04 — Bermimpi</strong><p>Mempersiapkan diri agar memiliki kemampuan dan pengalaman untuk masa depan.</p></div>
+            <div class="story-note glass reveal"><h3>Harapan Saya</h3><p>Semoga saya bisa menjadi siswa yang rajin, disiplin, bertanggung jawab, membanggakan keluarga, dan sukses meraih cita-cita.</p></div>
+          </aside>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <div class="container">
+          <div class="story-note glass reveal">
+            <span class="eyebrow">PESAN PENUTUP</span>
+            <h2 style="font-size:1.5rem;margin-top:8px">Perjalanan Masih Panjang</h2>
+            <p class="muted" style="margin-top:10px">Saya percaya bahwa masa sekolah bukan hanya tentang mendapatkan nilai, tetapi juga tentang membentuk karakter, persahabatan, pengalaman, dan keterampilan. Saya akan terus belajar dan berusaha menjadi pribadi yang lebih baik.</p>
+            <a class="btn btn-primary" href="#beranda" data-go-profile style="margin-top:18px">Kembali ke Profil ↗</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <p>© <span id="year"></span> M. Said Al Fathir. Dibuat dengan semangat belajar.</p>
+      <a class="back-top" href="#beranda" data-go-profile>↑ Kembali ke atas</a>
+    </div>
+  </footer>
+
+  <script>
+    // ==================== 1. PILIH ELEMEN ====================
+    const body = document.body;
+    const themeToggle = document.getElementById("themeToggle");
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    const profilePage = document.getElementById("profilPage");
+    const storyPage = document.getElementById("kisahPage");
+    const navItems = document.querySelectorAll("[data-page-link]");
+
+    // ==================== 2. MODE GELAP / TERANG ====================
+    // Tema mengikuti sistem perangkat jika pengguna belum memilih tema sendiri.
+    const savedTheme = localStorage.getItem("said-theme");
+    const systemLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+    if (savedTheme === "light" || (!savedTheme && systemLight)) body.classList.add("light");
+    updateThemeIcon();
+
+    function updateThemeIcon() {
+      themeToggle.textContent = body.classList.contains("light") ? "🌙" : "☀️";
+      themeToggle.setAttribute("aria-label", body.classList.contains("light") ? "Aktifkan mode gelap" : "Aktifkan mode terang");
+    }
+    themeToggle.addEventListener("click", () => {
+      body.classList.toggle("light");
+      localStorage.setItem("said-theme", body.classList.contains("light") ? "light" : "dark");
+      updateThemeIcon();
+    });
+
+    // ==================== 3. NAVIGASI DUA HALAMAN ====================
+    function showPage(pageName) {
+      const isStory = pageName === "kisah";
+      profilePage.classList.toggle("active", !isStory);
+      storyPage.classList.toggle("active", isStory);
+      navItems.forEach(link => {
+        const active = link.dataset.pageLink === pageName;
+        link.classList.toggle("active", active && (isStory ? link.getAttribute("href") === "#kisah" : link.getAttribute("href") === "#beranda"));
+      });
+      navLinks.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.textContent = "☰";
+      window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
+      if (targetId && targetId !== "beranda" && !isStory) {
+        setTimeout(() => document.getElementById(targetId)?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" }), 80);
+      }
+      setTimeout(observeReveals, 80);
+    }
+
+    navItems.forEach(link => {
+      link.addEventListener("click", event => {
+        event.preventDefault();
+        const pageName = link.dataset.pageLink;
+        const target = link.getAttribute("href").slice(1);
+        showPage(pageName, target);
+      });
+    });
+    document.querySelectorAll("[data-go-profile]").forEach(link => {
+      link.addEventListener("click", event => {
+        event.preventDefault();
+        showPage("profil", "beranda");
+      });
+    });
+    menuToggle.addEventListener("click", () => {
+      const opened = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(opened));
+      menuToggle.textContent = opened ? "✕" : "☰";
+    });
+
+    // ==================== 4. FOTO PROFIL ====================
+    const photoInput = document.getElementById("photoInput");
+    const profileImage = document.getElementById("profileImage");
+    const avatarInitial = document.getElementById("avatarInitial");
+    const avatarArea = document.getElementById("avatarArea");
+    const photoNotice = document.getElementById("photoNotice");
+    const PHOTO_KEY = "said-profile-photo";
+    const MAX_PHOTO_SIZE = 3 * 1024 * 1024;
+
+    function showPhoto(dataUrl) {
+      profileImage.src = dataUrl;
+      profileImage.hidden = false;
+      avatarInitial.hidden = true;
+    }
+    function resetPhoto() {
+      profileImage.removeAttribute("src");
+      profileImage.hidden = true;
+      avatarInitial.hidden = false;
+    }
+    try {
+      const storedPhoto = localStorage.getItem(PHOTO_KEY);
+      if (storedPhoto) showPhoto(storedPhoto);
+    } catch (error) {
+      photoNotice.textContent = "Penyimpanan foto tidak tersedia di browser ini.";
+      photoNotice.classList.add("error");
+    }
+    function choosePhoto() { photoInput.click(); }
+    document.getElementById("changePhoto").addEventListener("click", choosePhoto);
+    avatarArea.addEventListener("click", choosePhoto);
+    avatarArea.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") { event.preventDefault(); choosePhoto(); }
+    });
+    avatarArea.tabIndex = 0;
+    avatarArea.setAttribute("role", "button");
+    avatarArea.setAttribute("aria-label", "Pilih foto profil");
+
+    photoInput.addEventListener("change", event => {
+      const file = event.target.files && event.target.files[0];
+      photoNotice.classList.remove("error");
+      if (!file) return;
+      if (!file.type.startsWith("image/")) {
+        photoNotice.textContent = "File harus berupa gambar. Silakan pilih foto lain.";
+        photoNotice.classList.add("error"); photoInput.value = ""; return;
+      }
+      if (file.size > MAX_PHOTO_SIZE) {
+        photoNotice.textContent = "Ukuran foto maksimal 3 MB. Pilih foto yang lebih kecil.";
+        photoNotice.classList.add("error"); photoInput.value = ""; return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          localStorage.setItem(PHOTO_KEY, reader.result);
+          showPhoto(reader.result);
+          photoNotice.textContent = "Foto profil berhasil diperbarui!";
+        } catch (error) {
+          photoNotice.textContent = "Foto terlalu besar untuk disimpan browser. Coba gambar yang lebih kecil.";
+          photoNotice.classList.add("error");
+        }
+      };
+      reader.onerror = () => {
+        photoNotice.textContent = "Foto tidak dapat dibaca. Coba pilih file lain.";
+        photoNotice.classList.add("error");
+      };
+      reader.readAsDataURL(file);
+    });
+    document.getElementById("removePhoto").addEventListener("click", () => {
+      try { localStorage.removeItem(PHOTO_KEY); } catch (error) {}
+      resetPhoto();
+      photoInput.value = "";
+      photoNotice.classList.remove("error");
+      photoNotice.textContent = "Foto kembali ke avatar awal.";
+    });
+
+    // ==================== 5. EFEK MENGETIK ====================
+    const typingText = document.getElementById("typingText");
+    const roles = ["Pelajar SMK", "Pecinta Teknologi", "Kreator Digital", "Calon Game Developer"];
+    let roleIndex = 0, charIndex = 0, deleting = false;
+    const reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function typeEffect() {
+      if (reducedMotion) { typingText.textContent = roles[0]; return; }
+      const word = roles[roleIndex];
+      typingText.textContent = word.slice(0, charIndex);
+      if (!deleting && charIndex < word.length) {
+        charIndex++; setTimeout(typeEffect, 95);
+      } else if (deleting && charIndex > 0) {
+        charIndex--; setTimeout(typeEffect, 48);
+      } else {
+        deleting = !deleting;
+        if (!deleting) roleIndex = (roleIndex + 1) % roles.length;
+        setTimeout(typeEffect, deleting ? 1100 : 300);
+      }
+    }
+    typeEffect();
+
+    // ==================== 6. ANIMASI SAAT SCROLL ====================
+    let revealObserver;
+    function observeReveals() {
+      const elements = document.querySelectorAll(".page.active .reveal:not(.visible)");
+      if (reducedMotion) {
+        elements.forEach(element => element.classList.add("visible"));
+        document.querySelectorAll(".skill-fill").forEach(bar => bar.style.width = bar.dataset.width);
+        return;
+      }
+      if (!("IntersectionObserver" in window)) {
+        elements.forEach(element => element.classList.add("visible"));
+        document.querySelectorAll(".skill-fill").forEach(bar => bar.style.width = bar.dataset.width);
+        return;
+      }
+      if (revealObserver) revealObserver.disconnect();
+      revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            const bar = entry.target.querySelector(".skill-fill");
+            if (bar) bar.style.width = bar.dataset.width;
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      elements.forEach(element => revealObserver.observe(element));
+      document.querySelectorAll(".page.active .skill-fill").forEach(bar => {
+        if (bar.getBoundingClientRect().top < window.innerHeight) bar.style.width = bar.dataset.width;
+      });
+    }
+    observeReveals();
+
+    // ==================== 7. FORM KONTAK ====================
+    // Form ini demo sisi browser. Untuk mengirim pesan sungguhan, sambungkan ke layanan backend/email.
+    const contactForm = document.getElementById("contactForm");
+    const formStatus = document.getElementById("formStatus");
+    contactForm.addEventListener("submit", event => {
+      event.preventDefault();
+      if (!contactForm.checkValidity()) {
+        contactForm.reportValidity();
+        return;
+      }
+      const visitorName = document.getElementById("name").value.trim();
+      formStatus.textContent = `Terima kasih, ${visitorName}! Form berhasil divalidasi. Untuk pengiriman sungguhan, hubungkan form ke layanan email/backend.`;
+      contactForm.reset();
+    });
+
+    // ==================== 8. TAHUN FOOTER ====================
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
